@@ -13,10 +13,10 @@
         <h1 class="p-3 shadow-lg">JT blogs</h1>
     </header>
 
-    <section class="container-fluid mt-3"  >
-        <div class="p-3 shadow-lg rounded my-3" style="border: 2px solid black" th:each="blog : ${blogs}" >
-            <h3 th:text="${blog.heading}"></h3>
-            <p th:text="${blog.description}"></p>
+    <section class="container mt-3"    >
+        <div th:each="blog , field : ${blogs}" class="p-3 shadow-lg rounded my-3" style="border: 2px solid black"  >
+            <h3 th:text="| ${(field.index + 1) < 10 ? '0'+(field.index + 1) : (field.index+1)}.  ${blog.heading} |"></h3>
+            <!-- <p th:text="${blog.description}"></p> -->
         </div>
     </section>
 </body>
