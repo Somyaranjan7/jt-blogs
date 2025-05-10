@@ -20,4 +20,9 @@ public class BlogService {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Blog.class));
 
     }
+
+    public void addBlog(Blog blog) {
+        var query = "INSERT INTO " + BLOG_TABLE + " (heading , description) VALUES (? , ?)";
+        jdbcTemplate.update(query, blog.getHeading() , blog.getDescription()); 
+    }
 }

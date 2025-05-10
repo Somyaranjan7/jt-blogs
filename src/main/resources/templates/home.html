@@ -10,14 +10,20 @@
 <body>
     
     <header class="container-fluid mt-3 text-center" >
+        <main class="container-fluid text-end">
+            <a href=""></a>
+        
         <h1 class="p-3 shadow-lg">JT blogs</h1>
     </header>
 
-    <section class="container mt-3"    >
-        <div th:each="blog , field : ${blogs}" class="p-3 shadow-lg rounded my-3" style="border: 2px solid black"  >
+
+    <section class="container mt-3">
+        <div th:each="blog , field : ${blogs}" class="p-3 shadow-lg rounded my-3" onclick="handleOnheadingClick"  >
             <h3 th:text="| ${(field.index + 1) < 10 ? '0'+(field.index + 1) : (field.index+1)}.  ${blog.heading} |"></h3>
             <!-- <p th:text="${blog.description}"></p> -->
         </div>
     </section>
+    </main>
+    <script src="/js/home.js"></script>
 </body>
 </html>
