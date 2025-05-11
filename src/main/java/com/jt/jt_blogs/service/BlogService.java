@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import com.jt.jt_blogs.model.Blog;
@@ -24,5 +25,10 @@ public class BlogService {
     public void addBlog(Blog blog) {
         var query = "INSERT INTO " + BLOG_TABLE + " (heading , description) VALUES (? , ?)";
         jdbcTemplate.update(query, blog.getHeading() , blog.getDescription()); 
+    }
+
+    public void getBlogById(int id) {
+        var query = "SELECT * FROM " + BLOG_TABLE + " WHERE id = " + id;
+        jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Blog.class));    
     }
 }
