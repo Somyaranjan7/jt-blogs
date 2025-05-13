@@ -26,8 +26,22 @@ public class BlogService {
         jdbcTemplate.update(query, blog.getHeading() , blog.getDescription()); 
     }
 
-    public void getBlogById(int id) {
+    public Blog getBlogById(int id) {
         var query = "SELECT * FROM " + BLOG_TABLE + " WHERE id = " + id;
-        jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Blog.class));    
+        return jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<>(Blog.class));    
+    }
+
+    public void deleteBlog(int id) {
+        var query = "DELETE FROM %s WHERE id = ?" . formatted(BLOG_TABLE);
+        jdbcTemplate.update(query , id);
+    }
+
+    public void updateBlog(Blog blog) {
+        var id = blog.getId();
+        var heading = blog.getHeading();
+        var description = blog.getDescription();
+
+        var query = "UPDATE %s SET heading = ? , description = ? WHERE id = ?".formatted(BLOG_TABLE);
+        jdbcTemplate.update(query , heading , description , id);
     }
 }
